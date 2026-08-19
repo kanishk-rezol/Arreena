@@ -35,6 +35,7 @@ frontend/dist/
 frontend/node_modules/
 
 # IDE & OS
+.agents/
 .vscode/
 .idea/
 .DS_Store
