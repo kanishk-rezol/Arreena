@@ -1,0 +1,84 @@
+<svg width="680" height="480" viewBox="0 0 680 480" xmlns="http://www.w3.org/2000/svg" role="img">
+<title>Video conferencing system architecture</title>
+<desc>Browsers connect to a Python backend server containing a signaling module and an SFU media engine. The backend also talks to a TURN/STUN server and a PostgreSQL database.</desc>
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#5F5E5A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
+</defs>
+<rect width="680" height="480" fill="#ffffff"/>
+
+<!-- Browser clients row -->
+<g>
+  <rect x="40" y="30" width="150" height="56" rx="12" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+  <text x="115" y="50" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="500" fill="#2C2C2A">Browser A</text>
+  <text x="115" y="68" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#5F5E5A">getUserMedia, RTCPeerConnection</text>
+</g>
+<g>
+  <rect x="265" y="30" width="150" height="56" rx="12" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+  <text x="340" y="50" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="500" fill="#2C2C2A">Browser B</text>
+  <text x="340" y="68" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#5F5E5A">getUserMedia, RTCPeerConnection</text>
+</g>
+<g>
+  <rect x="490" y="30" width="150" height="56" rx="12" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+  <text x="565" y="50" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="500" fill="#2C2C2A">Browser C</text>
+  <text x="565" y="68" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#5F5E5A">getUserMedia, RTCPeerConnection</text>
+</g>
+
+<line x1="115" y1="86" x2="115" y2="120" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="340" y1="86" x2="340" y2="120" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="565" y1="86" x2="565" y2="120" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+<!-- Backend server outer container -->
+<g>
+  <rect x="40" y="120" width="600" height="230" rx="20" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+  <text x="60" y="145" font-family="sans-serif" font-size="14" font-weight="500" fill="#04342C">Python backend server</text>
+</g>
+
+<!-- signaling region -->
+<g>
+  <rect x="65" y="165" width="260" height="80" rx="12" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+  <text x="195" y="192" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="500" fill="#042C53">Signaling (FastAPI WS)</text>
+  <text x="195" y="212" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#185FA5">Offer/answer, ICE exchange</text>
+</g>
+
+<!-- SFU region -->
+<g>
+  <rect x="355" y="165" width="260" height="80" rx="12" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+  <text x="485" y="192" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="500" fill="#26215C">SFU media engine (aiortc)</text>
+  <text x="485" y="212" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#534AB7">RoomManager, MediaRelay</text>
+</g>
+
+<line x1="325" y1="205" x2="353" y2="205" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="353" y1="220" x2="325" y2="220" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+<!-- P2P note below signaling -->
+<g>
+  <rect x="65" y="265" width="260" height="60" rx="12" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+  <text x="195" y="288" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="500" fill="#2C2C2A">1:1 calls</text>
+  <text x="195" y="306" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#5F5E5A">media stays peer-to-peer</text>
+</g>
+<line x1="195" y1="245" x2="195" y2="263" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+<!-- group note below SFU -->
+<g>
+  <rect x="355" y="265" width="260" height="60" rx="12" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+  <text x="485" y="288" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="500" fill="#2C2C2A">Group calls</text>
+  <text x="485" y="306" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#5F5E5A">media relayed via server</text>
+</g>
+<line x1="485" y1="245" x2="485" y2="263" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+<!-- external: TURN and DB below outer container -->
+<g>
+  <rect x="80" y="390" width="200" height="56" rx="12" fill="#FAECE7" stroke="#993C1D" stroke-width="0.5"/>
+  <text x="180" y="410" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="500" fill="#4A1B0C">coturn (TURN/STUN)</text>
+  <text x="180" y="428" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#993C1D">NAT traversal</text>
+</g>
+<g>
+  <rect x="400" y="390" width="200" height="56" rx="12" fill="#FAECE7" stroke="#993C1D" stroke-width="0.5"/>
+  <text x="500" y="410" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="500" fill="#4A1B0C">PostgreSQL</text>
+  <text x="500" y="428" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#993C1D">Users, rooms, history</text>
+</g>
+
+<line x1="180" y1="350" x2="180" y2="388" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="500" y1="350" x2="500" y2="388" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+</svg>
