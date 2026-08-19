@@ -34,7 +34,8 @@ yarn-error.log*
 frontend/dist/
 frontend/node_modules/
 
-# IDE & OS
+# Documentation & IDE
+docs/
 .agents/
 .vscode/
 .idea/
